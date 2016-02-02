@@ -1,3 +1,4 @@
+require('prismjs')
 const bespoke = require('bespoke')
 const theme = require('<%= theme %>')
 const keys = require('bespoke-keys')
@@ -10,7 +11,7 @@ const progress = require('bespoke-progress')
 const indexFinger = require('bespoke-indexfinger')
 const secondary = require('bespoke-secondary')
 
-bespoke.from('article', [
+var plugins = [
   theme(),
   keys(),
   touch(),
@@ -21,6 +22,18 @@ bespoke.from('article', [
   progress(),
   indexFinger(),
   secondary()
-])
+]
 
-require('prismjs')
+try {
+  require('plugins')(plugins)
+} catch (error) {
+
+}
+
+var deck = bespoke.from('article', plugins)
+
+try {
+  require('deck')(deck)
+} catch (error) {
+
+}

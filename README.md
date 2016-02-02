@@ -11,6 +11,9 @@ Slides takes your notes and images and turns them into a slide deck built with [
  * Keyboard Control
  * Presenter notes
  * Live-reload
+ * es6 to es5 translation
+ * Source maps
+ * Extension API
 
 ### Controls
 
@@ -37,11 +40,36 @@ my-presentation
   ├- images
   |  └- foo.jpg
   ├- scripts
-  |  └- main.js
+  |  |  plugins.js
+  |  └- deck.js
   ├- styles
   |  └- main.styl
   └- video
      └- foo.mp4
+```
+
+### Extension points
+
+#### `scripts/plugins.js`
+
+If present, `plugins.js` will be called with the default list of bespoke.js plugins for you to modify.  It should take the form:
+
+```javascript
+// plugins.js
+module.exports = (plugins) => {
+  // plugins is the default list of bespoke.js plugins
+}
+```
+
+#### `scripts/deck.js`
+
+If present, `scripts/deck.js` will be invoked after creating the slide deck.  It should take the form:
+
+```javascript
+// deck.js
+module.exports = (deck) => {
+  // deck is the bespoke.js slide deck
+}
 ```
 
 ### package.json
@@ -80,7 +108,7 @@ If you specify a different theme, make sure it's a dependency of your project!
 
 A few simple rules:
 
-1. The root node should be an `article`
+1. The presentation will be generated from the `article` element
 2. All slides should be in `section` nodes
 
 Otherwise, write normal html:
@@ -89,21 +117,21 @@ Otherwise, write normal html:
 article
 
   section
-    h1 I am a slide deck
+    h1 Nebula
 
-  section.emphatic-text
-    h2 This slide has notes
-    p Press 's' to see
-
-    aside
-      h2 These are notes
-      ul
-        li Note 1
-        li Note 2
+  section(data-bespoke-backdrop='orion')
+    h2 A <a href="https://github.com/markdalgleish/bespoke.js">Bespoke.js</a> theme
 
   section
-    h2 I can have lists
-    ul
-      li Item 1
-      li Item 2
+    h3 &mdash; Lovingly crafted by &mdash;
+    h2 <a href="https://github.com/markdalgleish">Mark Dalgleish</a>
+
+  section
+    h2.single-words Try the &lsquo;single-words&rsquo; class
+
+  section
+    h2.bullet Enjoy <span class='bullet'>:)</span>
+
+a(href='https://github.com/markdalgleish/bespoke-theme-nebula')
+  img(style='position: absolute; z-index: 1; top: 0; right: 0; border: 0; width: 25vw; max-width: 149px;', src='http://aral.github.com/fork-me-on-github-retina-ribbons/right-grey@2x.png' alt='Fork me on GitHub')
 ```
