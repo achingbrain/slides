@@ -36,38 +36,40 @@ $ npm run publish-slides
 
 ### Your directory structure
 
-  my-presentation
-    ├- slides.jade
-    ├- images
-    |  └- foo.jpg
-    ├- video
-    |  └- foo.mp4
-    ├- audio
-    |  └- foo.mp3
-    ├- styles
-    |  └- main.styl
-    └- scripts
-       └- main.js
+    my-presentation
+      ├- slides.jade
+      ├- images
+      |  └- foo.jpg
+      ├- video
+      |  └- foo.mp4
+      ├- audio
+      |  └- foo.mp3
+      ├- styles
+      |  └- main.styl
+      └- scripts
+         └- main.js
 
 ## A sample `slides.jade`
 
-  article
+N.b. the root node should be an `article`
 
-    section
-      h1 I am a slide deck
+    article
 
-    section.emphatic-text
-      h1 This slide has notes
-      h2 Press 's' to see
+      section
+        h1 I am a slide deck
 
-      aside
-        h2 These are notes
+      section.emphatic-text
+        h2 This slide has notes
+        p Press 's' to see
+
+        aside
+          h2 These are notes
+          ul
+            li Note 1
+            li Note 2
+
+      section
+        h2 I can have lists
         ul
-          li Note 1
-          li Note 2
-
-    section
-      h2 I can have lists
-      ul
-        li Item 1
-        li Item 2
+          li Item 1
+          li Item 2
