@@ -1,0 +1,23 @@
+// New to Stylus? Check out http://learnboost.github.io/stylus
+// Use modern CSS thanks to Autoprefixer: https://github.com/ai/autoprefixer
+
+// Import CSS from "node_modules" and "bower_components"
+// thanks to Stylus' "import css" and "paths" options
+
+@import 'prismjs/themes/prism-okaidia.css'
+// Check out "node_modules/prismjs/themes/" for available themes
+
+a {
+  border-bottom: 0 none;
+}
+
+.list-item
+  opacity: 1 !important;
+  font-family: didot;
+  margin-bottom: 2rem;
+
+.list-item:before
+  content: '\2605';
+
+aside
+  display: none;
