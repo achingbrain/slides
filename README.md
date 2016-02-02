@@ -16,11 +16,11 @@ Slides takes your notes and images and turns them into a slide deck built with [
 
 Keyboard controls of note are:
 
- | Key    | Action         |
- | ------ |----------------|
- | &rarr; | Next slide     |
- | &larr; | Previous slide |
- | s      | Open notes     |
+| Key    | Action         |
+| ------ |----------------|
+| &rarr; | Next slide     |
+| &larr; | Previous slide |
+| s      | Open notes     |
 
 ## Getting started
 
