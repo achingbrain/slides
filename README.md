@@ -48,63 +48,9 @@ my-presentation
      └- foo.mp4
 ```
 
-### Extension points
+### `slides.jade`
 
-#### `scripts/plugins.js`
-
-If present, `plugins.js` will be called with the default list of bespoke.js plugins for you to modify.  It should take the form:
-
-```javascript
-// plugins.js
-module.exports = (plugins) => {
-  // plugins is the default list of bespoke.js plugins
-}
-```
-
-#### `scripts/deck.js`
-
-If present, `scripts/deck.js` will be invoked after creating the slide deck.  It should take the form:
-
-```javascript
-// deck.js
-module.exports = (deck) => {
-  // deck is the bespoke.js slide deck
-}
-```
-
-### package.json
-
-Make your package.json look something like:
-
-```javascript
-{
-  "name": "electricity-a-primer",
-  "version": "1.0.0",
-  "description": "A slideshow",
-  "dependencies": {
-    "@achingbrain/slides": "^1.0.0"
-  },
-  "scripts": {
-    "start": "slides present",
-    "deploy": "slides publish"
-  },
-  "author": {
-    "name": "Your name here"
-  },
-  "license": "ISC",
-  "slides": {
-    // all properties are optional
-    "title": "Will appear in the <title> tag",
-    "author": "Your name",
-    "description": "Will appear in a <meta> tag",
-    "theme": "bespoke-theme-nebula"
-  }
-}
-```
-
-If you specify a different theme, make sure it's a dependency of your project!
-
-### A sample `slides.jade`
+This is where your slides live.
 
 A few simple rules:
 
@@ -134,4 +80,63 @@ article
 
 a(href='https://github.com/markdalgleish/bespoke-theme-nebula')
   img(style='position: absolute; z-index: 1; top: 0; right: 0; border: 0; width: 25vw; max-width: 149px;', src='http://aral.github.com/fork-me-on-github-retina-ribbons/right-grey@2x.png' alt='Fork me on GitHub')
+```
+
+
+### `package.json`
+
+Make your `package.json` look something like:
+
+```javascript
+{
+  "name": "electricity-a-primer",
+  "version": "1.0.0",
+  "description": "A slideshow",
+  "dependencies": {
+    "@achingbrain/slides": "^1.0.0"
+  },
+  "scripts": {
+    "start": "slides present",
+    "deploy": "slides publish"
+  },
+  "author": {
+    "name": "Your name here"
+  },
+  "license": "ISC",
+  "slides": {
+    // all properties are optional
+    "title": "Will appear in the <title> tag",
+    "author": "Your name",
+    "description": "Will appear in a <meta> tag",
+    "theme": "bespoke-theme-nebula"
+  }
+}
+```
+
+If you specify a different theme, make sure it's a dependency of your project!
+
+## Extension points
+
+If you need to customise Bespoke.js, this is how you do it.
+
+#### `scripts/plugins.js`
+
+If present, `plugins.js` will be called with the default list of bespoke.js plugins for you to modify.  It should take the form:
+
+```javascript
+// plugins.js
+module.exports = (plugins) => {
+  // plugins is the default list of bespoke.js plugins
+}
+```
+
+#### `scripts/deck.js`
+
+If present, `scripts/deck.js` will be invoked after creating the slide deck.  It should take the form:
+
+```javascript
+// deck.js
+module.exports = (deck) => {
+  // deck is the bespoke.js slide deck
+}
 ```
