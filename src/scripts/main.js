@@ -1,5 +1,5 @@
 const bespoke = require('bespoke')
-const themeNebula = require('bespoke-theme-nebula')
+const theme = require('<%= theme %>')
 const keys = require('bespoke-keys')
 const touch = require('bespoke-touch')
 const bullets = require('bespoke-bullets')
@@ -11,7 +11,7 @@ const indexFinger = require('bespoke-indexfinger')
 const secondary = require('bespoke-secondary')
 
 bespoke.from('article', [
-  themeNebula(),
+  theme(),
   keys(),
   touch(),
   bullets('li, .bullet'),

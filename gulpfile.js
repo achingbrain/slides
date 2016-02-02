@@ -1,10 +1,9 @@
 const gulp = require('gulp')
 const gutil = require('gulp-util')
-const plumber = require('gulp-plumber')
 const rimraf = require('gulp-rimraf')
 const rename = require('gulp-rename')
 const connect = require('gulp-connect')
-const browserify = require('gulp-browserify')
+const browserify = require('browserify')
 const uglify = require('gulp-uglify')
 const jade = require('gulp-jade')
 const stylus = require('gulp-stylus')
@@ -12,12 +11,11 @@ const autoprefixer = require('gulp-autoprefixer')
 const csso = require('gulp-csso')
 const template = require('gulp-template')
 const concat = require('gulp-concat')
-const through = require('through')
 const opn = require('opn')
 const ghpages = require('gh-pages')
 const path = require('path')
 const fs = require('fs')
-const isDist = process.argv.indexOf('serve') === -1
+const transform = require('vinyl-transform')
 const pkg = require('./package.json')
 const deckPkg = require(process.cwd() + '/package.json')
 
@@ -26,19 +24,34 @@ const TMP_DIR = path.join(__dirname, 'temp')
 const DIST_DIR = path.join(__dirname, 'dist')
 const USER_DIR = process.cwd()
 
+const SLIDES_TITLE = deckPkg.slides && deckPkg.slides.title ? deckPkg.slides.title : deckPkg.name
+const SLIDES_DESCRIPTION = deckPkg.slides && deckPkg.slides.description ? deckPkg.slides.description : deckPkg.description
+const SLIDES_AUTHOR = deckPkg.slides && deckPkg.slides.author ? deckPkg.slides.author : (deckPkg.author && deckPkg.author.name ? deckPkg.author.name : '')
+const SLIDES_THEME = deckPkg.slides && deckPkg.slides.theme ? deckPkg.slides.theme : 'bespoke-theme-nebula'
+
+const browserified = transform((filename) => {
+  var b = browserify(filename)
+  return b.bundle()
+})
+
 gulp.task('js', ['clean:js'], () => {
-  return gulp.src(SRC_DIR + '/scripts/main.js')
-    .pipe(isDist ? through() : plumber())
-    .pipe(browserify({ debug: !isDist }))
-    .pipe(isDist ? uglify() : through())
-    .pipe(rename('slides.js'))
+  return gulp.src([
+    SRC_DIR + '/scripts/main.js',
+    USER_DIR + '/scripts/main.js'
+  ])
+    .pipe(concat('main.js'))
+    .pipe(template({
+      theme: SLIDES_THEME
+    }))
+    .pipe(gulp.dest(TMP_DIR))
+    .pipe(browserified)
+    .pipe(uglify())
     .pipe(gulp.dest(DIST_DIR))
     .pipe(connect.reload())
 })
 
 gulp.task('html', ['clean:html', 'html:template'], () => {
   return gulp.src(TMP_DIR + '/template.jade')
-    .pipe(isDist ? through() : plumber())
     .pipe(jade({ pretty: true }))
     .pipe(rename('index.html'))
     .pipe(gulp.dest(DIST_DIR))
@@ -48,9 +61,9 @@ gulp.task('html', ['clean:html', 'html:template'], () => {
 gulp.task('html:template', () => {
   return gulp.src(SRC_DIR + '/template.jade')
     .pipe(template({
-      author: deckPkg.author,
-      description: deckPkg.description,
-      title: deckPkg.name,
+      author: SLIDES_AUTHOR,
+      description: SLIDES_DESCRIPTION,
+      title: SLIDES_TITLE,
       slides: fs.readFileSync(path.join(process.cwd(), 'slides.jade'), 'utf8').replace(/\n/g, '\n    ')
     }))
     .pipe(gulp.dest(TMP_DIR))
@@ -61,7 +74,6 @@ gulp.task('css', ['clean:css'], () => {
     SRC_DIR + '/styles/main.styl',
     USER_DIR + '/styles/main.styl'
   ])
-    .pipe(isDist ? through() : plumber())
     .pipe(concat('slides.styl'))
     .pipe(stylus({
       // Allow CSS to be imported from node_modules and bower_components
@@ -69,7 +81,7 @@ gulp.task('css', ['clean:css'], () => {
       'paths': ['./node_modules', './bower_components', './node_modules/' + pkg.name + '/node_modules']
     }))
     .pipe(autoprefixer('last 2 versions', { map: false }))
-    .pipe(isDist ? csso() : through())
+    .pipe(csso())
     .pipe(rename('slides.css'))
     .pipe(gulp.dest(DIST_DIR))
     .pipe(connect.reload())
