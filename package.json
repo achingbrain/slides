@@ -7,7 +7,7 @@
     "url": "git://github.com/achingbrain/notes.git"
   },
   "bin": {
-    "slides": "./index.js"
+    "slides": "./bin/slides"
   },
   "dependencies": {
     "bespoke": "^1.0.0",

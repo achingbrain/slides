@@ -54,7 +54,7 @@ Make your package.json look something like:
   "version": "1.0.0",
   "description": "A slideshow",
   "dependencies": {
-    "slides": "^0.0.0"
+    "@achingbrain/slides": "^1.0.0"
   },
   "scripts": {
     "start": "slides present",
