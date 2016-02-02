@@ -12,7 +12,7 @@ Slides takes your notes and images and turns them into a slide deck built with [
  * Presenter notes
  * Live-reload
 
- ### Controls
+### Controls
 
  | Key    | Action         |
  | ------ |----------------|
