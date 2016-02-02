@@ -24,49 +24,6 @@ Keyboard controls of note are:
 
 ## Getting started
 
-To write a slideshow, make your package.json look something like:
-
-```javascript
-{
-  "name": "electricity-a-primer",
-  "version": "1.0.0",
-  "description": "A slideshow",
-  "dependencies": {
-    "slides": "^0.0.0"
-  },
-  "scripts": {
-    "start": "slides present",
-    "deploy": "slides publish"
-  },
-  "author": {
-    name: "Your name here"
-  },
-  "license": "ISC",
-  "slides": {
-    // configuration options here
-  }
-}
-```
-
-## Configuration
-
-By default slides uses the `bespoke-theme-nebula` theme and pulls the `name`, `description` and `author.name` fields from your project's `package.json`.
-
-To override this behaviour, add a `slides` entry to your `package.json`:
-
-```javascript
-{
-  "slides": {
-    "title": "Will appear in the <title> tag",
-    "author": "Your name",
-    "description": "Will appear in a <meta> tag",
-    "theme": "bespoke-theme-nebula"
-  }
-}
-```
-
-If you specify a different theme, make sure it's installed!
-
 ### Your directory structure
 
 Make your project look like this:
@@ -86,6 +43,38 @@ my-presentation
   └- video
      └- foo.mp4
 ```
+
+### package.json
+
+Make your package.json look something like:
+
+```javascript
+{
+  "name": "electricity-a-primer",
+  "version": "1.0.0",
+  "description": "A slideshow",
+  "dependencies": {
+    "slides": "^0.0.0"
+  },
+  "scripts": {
+    "start": "slides present",
+    "deploy": "slides publish"
+  },
+  "author": {
+    "name": "Your name here"
+  },
+  "license": "ISC",
+  "slides": {
+    // all properties are optional
+    "title": "Will appear in the <title> tag",
+    "author": "Your name",
+    "description": "Will appear in a <meta> tag",
+    "theme": "bespoke-theme-nebula"
+  }
+}
+```
+
+If you specify a different theme, make sure it's a dependency of your project!
 
 ### A sample `slides.jade`
 
