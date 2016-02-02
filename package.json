@@ -4,7 +4,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/achingbrain/notes.git"
+    "url": "git://github.com/achingbrain/slides.git"
   },
   "bin": {
     "slides": "./bin/slides"
