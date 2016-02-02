@@ -89,20 +89,21 @@ Make your `package.json` look something like:
 
 ```javascript
 {
-  "name": "electricity-a-primer",
+  "name": "my-presentation",
   "version": "1.0.0",
   "description": "A slideshow",
-  "dependencies": {
-    "@achingbrain/slides": "^1.0.0"
+  "license": "ISC",
+  "author": {
+    "name": "Your name here",
+    "email": "me@example.org"
   },
   "scripts": {
     "start": "slides present",
     "deploy": "slides publish"
   },
-  "author": {
-    "name": "Your name here"
+  "dependencies": {
+    "@achingbrain/slides": "^1.0.0"
   },
-  "license": "ISC",
   "slides": {
     // all properties are optional
     "title": "Will appear in the <title> tag",
