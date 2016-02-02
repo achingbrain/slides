@@ -35,6 +35,7 @@ Make your project look like this:
 my-presentation
   ├- package.json
   ├- slides.jade
+  ├- favicon.ico
   ├- audio
   |  └- foo.mp3
   ├- images

@@ -83,6 +83,18 @@ gulp.task('images', ['clean:images'], () => {
     .pipe(plugins.connect.reload())
 })
 
+gulp.task('audio', ['clean:audio'], () => {
+  return gulp.src(USER_DIR + '/audio/**/*')
+    .pipe(gulp.dest(DIST_DIR + '/audio'))
+    .pipe(plugins.connect.reload())
+})
+
+gulp.task('video', ['clean:video'], () => {
+  return gulp.src(USER_DIR + '/video/**/*')
+    .pipe(gulp.dest(DIST_DIR + '/video'))
+    .pipe(plugins.connect.reload())
+})
+
 gulp.task('favicon', () => {
   return gulp.src(USER_DIR + '/favicon.ico')
     .pipe(gulp.dest(DIST_DIR))
@@ -114,6 +126,16 @@ gulp.task('clean:css', () => {
 
 gulp.task('clean:images', () => {
   return gulp.src(DIST_DIR + '/images')
+    .pipe(plugins.rimraf({ force: true }))
+})
+
+gulp.task('clean:audio', () => {
+  return gulp.src(DIST_DIR + '/audio')
+    .pipe(plugins.rimraf({ force: true }))
+})
+
+gulp.task('clean:video', () => {
+  return gulp.src(DIST_DIR + '/video')
     .pipe(plugins.rimraf({ force: true }))
 })
 
@@ -151,6 +173,6 @@ gulp.task('deploy', ['build'], (done) => {
   }, done)
 })
 
-gulp.task('build', ['js', 'html', 'css', 'images', 'favicon'])
+gulp.task('build', ['js', 'html', 'css', 'images', 'audio', 'video', 'favicon'])
 gulp.task('serve', ['connect', 'watch'])
 gulp.task('default', ['build'])
