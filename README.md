@@ -48,40 +48,7 @@ my-presentation
      └- foo.mp4
 ```
 
-### `slides.jade`
-
-This is where your slides live.
-
-A few simple rules:
-
-1. The presentation will be generated from the `article` element
-2. All slides should be in `section` nodes
-
-Otherwise, write normal html:
-
-```jade
-article
-
-  section
-    h1 Nebula
-
-  section(data-bespoke-backdrop='orion')
-    h2 A <a href="https://github.com/markdalgleish/bespoke.js">Bespoke.js</a> theme
-
-  section
-    h3 &mdash; Lovingly crafted by &mdash;
-    h2 <a href="https://github.com/markdalgleish">Mark Dalgleish</a>
-
-  section
-    h2.single-words Try the &lsquo;single-words&rsquo; class
-
-  section
-    h2.bullet Enjoy <span class='bullet'>:)</span>
-
-a(href='https://github.com/markdalgleish/bespoke-theme-nebula')
-  img(style='position: absolute; z-index: 1; top: 0; right: 0; border: 0; width: 25vw; max-width: 149px;', src='http://aral.github.com/fork-me-on-github-retina-ribbons/right-grey@2x.png' alt='Fork me on GitHub')
-```
-
+Apart from `package.json` and `slides.jade` all files/folders are optional.
 
 ### `package.json`
 
@@ -115,6 +82,40 @@ Make your `package.json` look something like:
 ```
 
 If you specify a different theme, make sure it's a dependency of your project!
+
+### `slides.jade`
+
+This is where your slides live.
+
+A few simple rules:
+
+1. The presentation will be generated from the `article` element
+2. All slides should be in `section` nodes
+
+Otherwise, write normal html:
+
+```jade
+article
+
+  section
+    h1 Nebula
+
+  section(data-bespoke-backdrop='orion')
+    h2 A <a href="https://github.com/markdalgleish/bespoke.js">Bespoke.js</a> theme
+
+  section
+    h3 &mdash; Lovingly crafted by &mdash;
+    h2 <a href="https://github.com/markdalgleish">Mark Dalgleish</a>
+
+  section
+    h2.single-words Try the &lsquo;single-words&rsquo; class
+
+  section
+    h2.bullet Enjoy <span class='bullet'>:)</span>
+
+a(href='https://github.com/markdalgleish/bespoke-theme-nebula')
+  img(style='position: absolute; z-index: 1; top: 0; right: 0; border: 0; width: 25vw; max-width: 149px;', src='http://aral.github.com/fork-me-on-github-retina-ribbons/right-grey@2x.png' alt='Fork me on GitHub')
+```
 
 ## Extension points
 
