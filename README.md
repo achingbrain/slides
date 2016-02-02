@@ -14,6 +14,8 @@ Slides takes your notes and images and turns them into a slide deck built with [
 
 ### Controls
 
+Keyboard controls of note are:
+
  | Key    | Action         |
  | ------ |----------------|
  | &rarr; | Next slide     |
