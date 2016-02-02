@@ -51,7 +51,12 @@ $ npm run publish-slides
 
 ## A sample `slides.jade`
 
-N.b. the root node should be an `article`
+A few simple rules:
+
+1. The root node should be an `article`
+2. All slides should be in `section` nodes
+
+Otherwise, write normal html:
 
     article
 
