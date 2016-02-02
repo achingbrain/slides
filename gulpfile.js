@@ -18,6 +18,7 @@ const ghpages = require('gh-pages')
 const path = require('path')
 const fs = require('fs')
 const isDist = process.argv.indexOf('serve') === -1
+const pkg = require('./package.json')
 const deckPkg = require(process.cwd() + '/package.json')
 
 const SRC_DIR = path.join(__dirname, 'src')
@@ -65,7 +66,7 @@ gulp.task('css', ['clean:css'], () => {
     .pipe(stylus({
       // Allow CSS to be imported from node_modules and bower_components
       'include css': true,
-      'paths': ['./node_modules', './bower_components', './node_modules/slides/node_modules']
+      'paths': ['./node_modules', './bower_components', './node_modules/' + pkg.name + '/node_modules']
     }))
     .pipe(autoprefixer('last 2 versions', { map: false }))
     .pipe(isDist ? csso() : through())
