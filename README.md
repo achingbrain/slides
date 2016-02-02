@@ -6,7 +6,7 @@ Have you ever experienced that feeling of dread when you sit down to write a sli
 
 Slides takes your notes and images and turns them into a slide deck built with [Bespoke.js](http://markdalgleish.com/projects/bespoke.js)
 
-### Features
+## Features
 
  * Keyboard Control
  * Presenter notes
@@ -15,7 +15,7 @@ Slides takes your notes and images and turns them into a slide deck built with [
  * Source maps
  * Extension API
 
-### Controls
+## Controls
 
 Keyboard controls of note are:
 
@@ -25,6 +25,8 @@ Keyboard controls of note are:
 | &larr; | Previous slide |
 | s      | Open notes     |
 
+[Other commands are available](https://github.com/bespokejs/bespoke-keys).
+
 ## Getting started
 
 ### Your directory structure
@@ -33,20 +35,20 @@ Make your project look like this:
 
 ```
 my-presentation
-  ├- package.json
-  ├- slides.jade
-  ├- favicon.ico
-  ├- audio
-  |  └- foo.mp3
-  ├- images
-  |  └- foo.jpg
-  ├- scripts
-  |  |  plugins.js
-  |  └- deck.js
-  ├- styles
-  |  └- main.styl
-  └- video
-     └- foo.mp4
+  ├ package.json
+  ├ slides.jade
+  ├ favicon.ico
+  ├ audio
+  |  └ foo.mp3
+  ├ images
+  |  └ foo.jpg
+  ├ scripts
+  |  ├ plugins.js
+  |  └ deck.js
+  ├ styles
+  |  └ main.styl
+  └ video
+     └ foo.mp4
 ```
 
 Apart from `package.json` and `slides.jade` all files/folders are optional.
@@ -122,7 +124,7 @@ a(href='https://github.com/markdalgleish/bespoke-theme-nebula')
 
 If you need to customise Bespoke.js, this is how you do it.
 
-#### `scripts/plugins.js`
+### `scripts/plugins.js`
 
 If present, `plugins.js` will be called with the default list of bespoke.js plugins for you to modify.  It should take the form:
 
@@ -133,7 +135,7 @@ module.exports = (plugins) => {
 }
 ```
 
-#### `scripts/deck.js`
+### `scripts/deck.js`
 
 If present, `scripts/deck.js` will be invoked after creating the slide deck.  It should take the form:
 
@@ -143,3 +145,7 @@ module.exports = (deck) => {
   // deck is the bespoke.js slide deck
 }
 ```
+
+## Example talks
+
+* [Electricity: A Primer](https://github.com/achingbrain/electricity-a-primer)
