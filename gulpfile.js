@@ -20,17 +20,18 @@ const SLIDES_BULLETS = deckPkg.slides && deckPkg.slides.bullets ? deckPkg.slides
 
 gulp.task('js', ['clean:js'], () => {
   return gulp.src([
-    SRC_DIR + '/scripts/main.js'
+    SRC_DIR + '/js/main.js'
   ])
     .pipe(plugins.template({
       theme: SLIDES_THEME,
       bullets: SLIDES_BULLETS
     }))
+    .pipe(plugins.rename('slides.js'))
     .pipe(plugins.sourcemaps.init())
     .pipe(gulp.dest(TMP_DIR))
     .pipe(plugins.webpackSourcemaps({
       resolve: {
-        root: USER_DIR + '/scripts'
+        root: USER_DIR + '/js'
       }
     }))
     .pipe(plugins.babel({
@@ -38,7 +39,7 @@ gulp.task('js', ['clean:js'], () => {
     }))
     .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write())
-    .pipe(gulp.dest(DIST_DIR))
+    .pipe(gulp.dest(DIST_DIR + '/js'))
     .pipe(plugins.connect.reload())
 })
 
@@ -63,8 +64,8 @@ gulp.task('html:template', () => {
 
 gulp.task('css', ['clean:css'], () => {
   return gulp.src([
-    SRC_DIR + '/styles/main.styl',
-    USER_DIR + '/styles/main.styl'
+    SRC_DIR + '/css/main.styl',
+    USER_DIR + '/css/main.styl'
   ])
     .pipe(plugins.concat('slides.styl'))
     .pipe(plugins.stylus({
@@ -75,7 +76,7 @@ gulp.task('css', ['clean:css'], () => {
     .pipe(plugins.autoprefixer('last 2 versions', { map: false }))
     .pipe(plugins.csso())
     .pipe(plugins.rename('slides.css'))
-    .pipe(gulp.dest(DIST_DIR))
+    .pipe(gulp.dest(DIST_DIR + '/css'))
     .pipe(plugins.connect.reload())
 })
 
@@ -117,12 +118,12 @@ gulp.task('clean:html', () => {
 })
 
 gulp.task('clean:js', () => {
-  return gulp.src(DIST_DIR + '/slides.js')
+  return gulp.src(DIST_DIR + '/js')
     .pipe(plugins.rimraf({ force: true }))
 })
 
 gulp.task('clean:css', () => {
-  return gulp.src(DIST_DIR + '/slides.css')
+  return gulp.src(DIST_DIR + '/css')
     .pipe(plugins.rimraf({ force: true }))
 })
 
@@ -161,10 +162,12 @@ gulp.task('connect', ['build'], (done) => {
 
 gulp.task('watch', () => {
   gulp.watch(USER_DIR + '/slides.jade', ['html'])
-  gulp.watch(USER_DIR + '/styles/**/*.styl', ['css'])
+  gulp.watch(USER_DIR + '/css/**/*.styl', ['css'])
   gulp.watch(USER_DIR + '/images/**/*', ['images'])
+  gulp.watch(USER_DIR + '/audio/**/*', ['audio'])
+  gulp.watch(USER_DIR + '/video/**/*', ['video'])
   gulp.watch([
-    USER_DIR + '/scripts/**/*.js',
+    USER_DIR + '/js/**/*.js',
     USER_DIR + '/bespoke-theme-*/dist/*.js' // Allow themes to be developed in parallel
   ], ['js'])
 })

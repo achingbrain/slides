@@ -42,10 +42,10 @@ my-presentation
   |  └ foo.mp3
   ├ images
   |  └ foo.jpg
-  ├ scripts
+  ├ js
   |  ├ plugins.js
   |  └ deck.js
-  ├ styles
+  ├ css
   |  └ main.styl
   └ video
      └ foo.mp4
@@ -125,7 +125,7 @@ a(href='https://github.com/markdalgleish/bespoke-theme-nebula')
 
 If you need to customise Bespoke.js, this is how you do it.
 
-### `scripts/plugins.js`
+### `js/plugins.js`
 
 If present, `plugins.js` will be called with the default list of bespoke.js plugins for you to modify.  It should take the form:
 
@@ -136,7 +136,7 @@ module.exports = (plugins) => {
 }
 ```
 
-### `scripts/deck.js`
+### `js/deck.js`
 
 If present, `scripts/deck.js` will be invoked after creating the slide deck.  It should take the form:
 
