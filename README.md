@@ -79,7 +79,8 @@ Make your `package.json` look something like:
     "title": "Will appear in the <title> tag",
     "author": "Your name",
     "description": "Will appear in a <meta> tag",
-    "theme": "bespoke-theme-nebula"
+    "theme": "bespoke-theme-nebula",
+    "bullets": ".delayed, .bullet" // selector for animated bullet points
   }
 }
 ```

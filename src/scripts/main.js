@@ -15,7 +15,7 @@ var plugins = [
   theme(),
   keys(),
   touch(),
-  bullets('li, .bullet'),
+  bullets('<%= bullets %>'),
   backdrop(),
   scale(),
   hash(),

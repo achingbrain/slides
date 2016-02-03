@@ -16,13 +16,15 @@ const SLIDES_TITLE = deckPkg.slides && deckPkg.slides.title ? deckPkg.slides.tit
 const SLIDES_DESCRIPTION = deckPkg.slides && deckPkg.slides.description ? deckPkg.slides.description : deckPkg.description
 const SLIDES_AUTHOR = deckPkg.slides && deckPkg.slides.author ? deckPkg.slides.author : (deckPkg.author && deckPkg.author.name ? deckPkg.author.name : '')
 const SLIDES_THEME = deckPkg.slides && deckPkg.slides.theme ? deckPkg.slides.theme : 'bespoke-theme-nebula'
+const SLIDES_BULLETS = deckPkg.slides && deckPkg.slides.bullets ? deckPkg.slides.bullets : '.delayed, .bullet'
 
 gulp.task('js', ['clean:js'], () => {
   return gulp.src([
     SRC_DIR + '/scripts/main.js'
   ])
     .pipe(plugins.template({
-      theme: SLIDES_THEME
+      theme: SLIDES_THEME,
+      bullets: SLIDES_BULLETS
     }))
     .pipe(plugins.sourcemaps.init())
     .pipe(gulp.dest(TMP_DIR))
