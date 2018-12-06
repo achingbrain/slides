@@ -41,7 +41,7 @@ gulp.task('js', ['clean:js'], () => {
     .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest(path.join(DIST_DIR, 'js')))
-    .pipe(plugins.connect.reload())
+    .pipe(plugins.achingbrain.connect.reload())
 })
 
 gulp.task('html', ['clean:html', 'html:template'], () => {
@@ -49,7 +49,7 @@ gulp.task('html', ['clean:html', 'html:template'], () => {
     .pipe(plugins.jade({ pretty: true }))
     .pipe(plugins.rename('index.html'))
     .pipe(gulp.dest(DIST_DIR))
-    .pipe(plugins.connect.reload())
+    .pipe(plugins.achingbrain.connect.reload())
 })
 
 gulp.task('html:template', () => {
@@ -79,31 +79,31 @@ gulp.task('css', ['clean:css'], () => {
     .pipe(plugins.csso())
     .pipe(plugins.rename('slides.css'))
     .pipe(gulp.dest(path.join(DIST_DIR, 'css')))
-    .pipe(plugins.connect.reload())
+    .pipe(plugins.achingbrain.connect.reload())
 })
 
 gulp.task('images', ['clean:images'], () => {
   return gulp.src(path.join(USER_DIR, 'images', '**', '*'))
     .pipe(gulp.dest(path.join(DIST_DIR, 'images')))
-    .pipe(plugins.connect.reload())
+    .pipe(plugins.achingbrain.connect.reload())
 })
 
 gulp.task('audio', ['clean:audio'], () => {
   return gulp.src(path.join(USER_DIR, 'audio', '**', '*'))
     .pipe(gulp.dest(path.join(DIST_DIR, 'audio')))
-    .pipe(plugins.connect.reload())
+    .pipe(plugins.achingbrain.connect.reload())
 })
 
 gulp.task('video', ['clean:video'], () => {
   return gulp.src(path.join(USER_DIR, 'video', '**', '*'))
     .pipe(gulp.dest(path.join(DIST_DIR, 'video')))
-    .pipe(plugins.connect.reload())
+    .pipe(plugins.achingbrain.connect.reload())
 })
 
 gulp.task('favicon', () => {
   return gulp.src(path.join(USER_DIR, 'favicon.ico'))
     .pipe(gulp.dest(DIST_DIR))
-    .pipe(plugins.connect.reload())
+    .pipe(plugins.achingbrain.connect.reload())
 })
 
 gulp.task('clean', () => {
@@ -145,7 +145,7 @@ gulp.task('clean:video', () => {
 })
 
 gulp.task('connect', ['build'], (done) => {
-  var app = plugins.connect.server({
+  var app = plugins.achingbrain.connect.server({
     root: DIST_DIR,
     livereload: true
   })
