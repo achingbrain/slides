@@ -37,7 +37,6 @@ Make your project look like this:
 my-presentation
   ├ package.json
   ├ slides.jade
-  ├ css.styl
   ├ favicon.ico
   ├ audio
   |  └ foo.mp3
@@ -53,8 +52,6 @@ my-presentation
 ```
 
 Apart from `package.json` and `slides.jade` all files/folders are optional.
-
-You can use `/css.styl` or `/css/main.styl`.
 
 ### `package.json`
 

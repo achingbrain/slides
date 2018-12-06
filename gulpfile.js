@@ -66,8 +66,7 @@ gulp.task('html:template', () => {
 gulp.task('css', ['clean:css'], () => {
   return gulp.src([
     path.join(SRC_DIR, 'css', 'main.styl'),
-    path.join(USER_DIR + 'css', 'main.styl'),
-    path.join(USER_DIR, 'css.styl')
+    path.join(USER_DIR, 'css', 'main.styl')
   ])
     .pipe(plugins.concat('slides.styl'))
     .pipe(plugins.stylus({
