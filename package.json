@@ -40,7 +40,7 @@
     "gulp-template": "^5.0.0",
     "gulp-uglify": "^3.0.1",
     "gulp-util": "^3.0.7",
-    "gulp-webpack-sourcemaps": "^0.3.0",
+    "gulp-webpack-sourcemaps": "achingbrain/gulp-webpack-sourcemaps",
     "insert-css": "^2.0.0",
     "opn": "^5.4.0",
     "prismjs": "^1.3.0",
