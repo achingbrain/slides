@@ -36,7 +36,7 @@ gulp.task('js', ['clean:js'], () => {
       }
     }))
     .pipe(plugins.babel({
-      presets: ['es2015']
+      presets: ['env']
     }))
     .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write())
