@@ -28,9 +28,9 @@ gulp.task('js', ['clean:js'], () => {
       bullets: SLIDES_BULLETS
     }))
     .pipe(plugins.rename('slides.js'))
-    .pipe(plugins.achingbrain.sourcemaps.init())
+    .pipe(plugins.sourcemaps.init())
     .pipe(gulp.dest(TMP_DIR))
-    .pipe(plugins.webpackSourcemaps({
+    .pipe(plugins.achingbrain.webpackSourcemaps({
       resolve: {
         root: path.join(USER_DIR, 'js')
       }
@@ -39,7 +39,7 @@ gulp.task('js', ['clean:js'], () => {
       presets: ['es2015']
     }))
     .pipe(plugins.uglify())
-    .pipe(plugins.achingbrain.sourcemaps.write())
+    .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest(path.join(DIST_DIR, 'js')))
     .pipe(plugins.achingbrain.connect.reload())
 })
