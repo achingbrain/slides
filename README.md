@@ -6,7 +6,7 @@ Have you ever experienced that feeling of dread when you sit down to write a sli
 
 Slides takes your notes and images and turns them into a slide deck built with [Bespoke.js](http://markdalgleish.com/projects/bespoke.js)
 
-## Features
+## Features
 
  * Keyboard Control
  * Presenter notes
