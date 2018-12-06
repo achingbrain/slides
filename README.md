@@ -37,6 +37,7 @@ Make your project look like this:
 my-presentation
   ├ package.json
   ├ slides.jade
+  ├ css.styl
   ├ favicon.ico
   ├ audio
   |  └ foo.mp3
@@ -52,6 +53,8 @@ my-presentation
 ```
 
 Apart from `package.json` and `slides.jade` all files/folders are optional.
+
+You can use `/css.styl` or `/css/main.styl`.
 
 ### `package.json`
 
@@ -103,6 +106,8 @@ article
 
   section
     h1 Nebula
+    aside
+      li Speaker notes go here
 
   section(data-bespoke-backdrop='orion')
     h2 A <a href="https://github.com/markdalgleish/bespoke.js">Bespoke.js</a> theme
@@ -119,6 +124,7 @@ article
 
 a(href='https://github.com/markdalgleish/bespoke-theme-nebula')
   img(style='position: absolute; z-index: 1; top: 0; right: 0; border: 0; width: 25vw; max-width: 149px;', src='http://aral.github.com/fork-me-on-github-retina-ribbons/right-grey@2x.png' alt='Fork me on GitHub')
+
 ```
 
 ## Extension points

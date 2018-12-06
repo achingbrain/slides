@@ -5,12 +5,13 @@ const ghpages = require('gh-pages')
 const path = require('path')
 const fs = require('fs')
 const pkg = require('./package.json')
-const deckPkg = require(process.cwd() + '/package.json')
 
 const SRC_DIR = path.join(__dirname, 'src')
 const TMP_DIR = path.join(__dirname, 'temp')
 const DIST_DIR = path.join(__dirname, 'dist')
 const USER_DIR = process.cwd()
+
+const deckPkg = require(path.join(USER_DIR, 'package.json'))
 
 const SLIDES_TITLE = deckPkg.slides && deckPkg.slides.title ? deckPkg.slides.title : deckPkg.name
 const SLIDES_DESCRIPTION = deckPkg.slides && deckPkg.slides.description ? deckPkg.slides.description : deckPkg.description
@@ -20,7 +21,7 @@ const SLIDES_BULLETS = deckPkg.slides && deckPkg.slides.bullets ? deckPkg.slides
 
 gulp.task('js', ['clean:js'], () => {
   return gulp.src([
-    SRC_DIR + '/js/main.js'
+    path.join(SRC_DIR, 'js', 'main.js')
   ])
     .pipe(plugins.template({
       theme: SLIDES_THEME,
@@ -31,7 +32,7 @@ gulp.task('js', ['clean:js'], () => {
     .pipe(gulp.dest(TMP_DIR))
     .pipe(plugins.webpackSourcemaps({
       resolve: {
-        root: USER_DIR + '/js'
+        root: path.join(USER_DIR, 'js')
       }
     }))
     .pipe(plugins.babel({
@@ -39,12 +40,12 @@ gulp.task('js', ['clean:js'], () => {
     }))
     .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write())
-    .pipe(gulp.dest(DIST_DIR + '/js'))
+    .pipe(gulp.dest(path.join(DIST_DIR, 'js')))
     .pipe(plugins.connect.reload())
 })
 
 gulp.task('html', ['clean:html', 'html:template'], () => {
-  return gulp.src(TMP_DIR + '/template.jade')
+  return gulp.src(path.join(TMP_DIR, 'template.jade'))
     .pipe(plugins.jade({ pretty: true }))
     .pipe(plugins.rename('index.html'))
     .pipe(gulp.dest(DIST_DIR))
@@ -52,20 +53,21 @@ gulp.task('html', ['clean:html', 'html:template'], () => {
 })
 
 gulp.task('html:template', () => {
-  return gulp.src(SRC_DIR + '/template.jade')
+  return gulp.src(path.join(SRC_DIR, 'template.jade'))
     .pipe(plugins.template({
       author: SLIDES_AUTHOR,
       description: SLIDES_DESCRIPTION,
       title: SLIDES_TITLE,
-      slides: fs.readFileSync(path.join(process.cwd(), 'slides.jade'), 'utf8').replace(/\n/g, '\n    ')
+      slides: fs.readFileSync(path.join(USER_DIR, 'slides.jade'), 'utf8').replace(/\n/g, '\n    ')
     }))
     .pipe(gulp.dest(TMP_DIR))
 })
 
 gulp.task('css', ['clean:css'], () => {
   return gulp.src([
-    SRC_DIR + '/css/main.styl',
-    USER_DIR + '/css/main.styl'
+    path.join(SRC_DIR, 'css', 'main.styl'),
+    path.join(USER_DIR + 'css', 'main.styl'),
+    path.join(USER_DIR, 'css.styl')
   ])
     .pipe(plugins.concat('slides.styl'))
     .pipe(plugins.stylus({
@@ -76,30 +78,30 @@ gulp.task('css', ['clean:css'], () => {
     .pipe(plugins.autoprefixer('last 2 versions', { map: false }))
     .pipe(plugins.csso())
     .pipe(plugins.rename('slides.css'))
-    .pipe(gulp.dest(DIST_DIR + '/css'))
+    .pipe(gulp.dest(path.join(DIST_DIR, 'css')))
     .pipe(plugins.connect.reload())
 })
 
 gulp.task('images', ['clean:images'], () => {
-  return gulp.src(USER_DIR + '/images/**/*')
-    .pipe(gulp.dest(DIST_DIR + '/images'))
+  return gulp.src(path.join(USER_DIR, 'images', '**', '*'))
+    .pipe(gulp.dest(path.join(DIST_DIR, 'images')))
     .pipe(plugins.connect.reload())
 })
 
 gulp.task('audio', ['clean:audio'], () => {
-  return gulp.src(USER_DIR + '/audio/**/*')
-    .pipe(gulp.dest(DIST_DIR + '/audio'))
+  return gulp.src(path.join(USER_DIR, 'audio', '**', '*'))
+    .pipe(gulp.dest(path.join(DIST_DIR, 'audio')))
     .pipe(plugins.connect.reload())
 })
 
 gulp.task('video', ['clean:video'], () => {
-  return gulp.src(USER_DIR + '/video/**/*')
-    .pipe(gulp.dest(DIST_DIR + '/video'))
+  return gulp.src(path.join(USER_DIR, 'video', '**', '*'))
+    .pipe(gulp.dest(path.join(DIST_DIR, 'video')))
     .pipe(plugins.connect.reload())
 })
 
 gulp.task('favicon', () => {
-  return gulp.src(USER_DIR + '/favicon.ico')
+  return gulp.src(path.join(USER_DIR, 'favicon.ico'))
     .pipe(gulp.dest(DIST_DIR))
     .pipe(plugins.connect.reload())
 })
@@ -113,32 +115,32 @@ gulp.task('clean', () => {
 })
 
 gulp.task('clean:html', () => {
-  return gulp.src(DIST_DIR + '/index.html')
+  return gulp.src(path.join(DIST_DIR, 'index.html'))
     .pipe(plugins.rimraf({ force: true }))
 })
 
 gulp.task('clean:js', () => {
-  return gulp.src(DIST_DIR + '/js')
+  return gulp.src(path.join(DIST_DIR, 'js'))
     .pipe(plugins.rimraf({ force: true }))
 })
 
 gulp.task('clean:css', () => {
-  return gulp.src(DIST_DIR + '/css')
+  return gulp.src(path.join(DIST_DIR, 'css'))
     .pipe(plugins.rimraf({ force: true }))
 })
 
 gulp.task('clean:images', () => {
-  return gulp.src(DIST_DIR + '/images')
+  return gulp.src(path.join(DIST_DIR, 'images'))
     .pipe(plugins.rimraf({ force: true }))
 })
 
 gulp.task('clean:audio', () => {
-  return gulp.src(DIST_DIR + '/audio')
+  return gulp.src(path.join(DIST_DIR, 'audio'))
     .pipe(plugins.rimraf({ force: true }))
 })
 
 gulp.task('clean:video', () => {
-  return gulp.src(DIST_DIR + '/video')
+  return gulp.src(path.join(DIST_DIR, 'video'))
     .pipe(plugins.rimraf({ force: true }))
 })
 
@@ -161,14 +163,14 @@ gulp.task('connect', ['build'], (done) => {
 })
 
 gulp.task('watch', () => {
-  gulp.watch(USER_DIR + '/slides.jade', ['html'])
-  gulp.watch(USER_DIR + '/css/**/*.styl', ['css'])
-  gulp.watch(USER_DIR + '/images/**/*', ['images'])
-  gulp.watch(USER_DIR + '/audio/**/*', ['audio'])
-  gulp.watch(USER_DIR + '/video/**/*', ['video'])
+  gulp.watch(path.join(USER_DIR, 'slides.jade'), ['html'])
+  gulp.watch(path.join(USER_DIR, 'css', '**', '*.styl'), ['css'])
+  gulp.watch(path.join(USER_DIR, 'images', '**', '*'), ['images'])
+  gulp.watch(path.join(USER_DIR, 'audio', '**', '*'), ['audio'])
+  gulp.watch(path.join(USER_DIR, 'video', '**', '*'), ['video'])
   gulp.watch([
-    USER_DIR + '/js/**/*.js',
-    USER_DIR + '/bespoke-theme-*/dist/*.js' // Allow themes to be developed in parallel
+    path.join(USER_DIR, 'js', '**', '*.js'),
+    path.join(USER_DIR, 'bespoke-theme-*', 'dist', '*.js') // Allow themes to be developed in parallel
   ], ['js'])
 })
 
