@@ -36,7 +36,7 @@ Make your project look like this:
 ```
 my-presentation
   ├ package.json
-  ├ slides.jade
+  ├ slides.pug
   ├ favicon.ico
   ├ audio
   |  └ foo.mp3
@@ -51,7 +51,7 @@ my-presentation
      └ foo.mp4
 ```
 
-Apart from `package.json` and `slides.jade` all files/folders are optional.
+Apart from `package.json` and `slides.pug` all files/folders are optional.
 
 ### `package.json`
 
@@ -87,7 +87,7 @@ Make your `package.json` look something like:
 
 If you specify a different theme, make sure it's a dependency of your project!
 
-### `slides.jade`
+### `slides.pug`
 
 This is where your slides live.
 

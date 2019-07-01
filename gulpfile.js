@@ -58,7 +58,7 @@ gulp.task('html:template', () => {
       author: SLIDES_AUTHOR,
       description: SLIDES_DESCRIPTION,
       title: SLIDES_TITLE,
-      slides: fs.readFileSync(path.join(USER_DIR, 'slides.jade'), 'utf8').replace(/\n/g, '\n    ')
+      slides: fs.readFileSync(path.join(USER_DIR, 'slides.pug'), 'utf8').replace(/\n/g, '\n    ')
     }))
     .pipe(gulp.dest(TMP_DIR))
 })
@@ -162,7 +162,7 @@ gulp.task('connect', ['build'], (done) => {
 })
 
 gulp.task('watch', () => {
-  gulp.watch(path.join(USER_DIR, 'slides.jade'), ['html'])
+  gulp.watch(path.join(USER_DIR, 'slides.pug'), ['html'])
   gulp.watch(path.join(USER_DIR, 'css', '**', '*.styl'), ['css'])
   gulp.watch(path.join(USER_DIR, 'images', '**', '*'), ['images'])
   gulp.watch(path.join(USER_DIR, 'audio', '**', '*'), ['audio'])
