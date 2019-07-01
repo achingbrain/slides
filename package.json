@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "gulp-connect": "^5.7.0",
-    "@achingbrain/gulp-webpack-sourcemaps": "achingbrain/gulp-webpack-sourcemaps",
+    "@achingbrain/gulp-webpack-sourcemaps": "^0.4.0",
     "@babel/core": "^7.2.0",
     "babel-preset-env": "^1.7.0",
     "bespoke": "^1.0.0",
