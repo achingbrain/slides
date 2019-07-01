@@ -32,7 +32,10 @@ gulp.task('js', ['clean:js'], () => {
     .pipe(gulp.dest(TMP_DIR))
     .pipe(plugins.achingbrain.webpackSourcemaps({
       resolve: {
-        root: path.join(USER_DIR, 'js')
+        modules: [
+          path.join(USER_DIR, 'js'),
+          'node_modules'
+        ]
       }
     }))
     .pipe(plugins.babel({
