@@ -31,18 +31,53 @@ gulp.task('js', ['clean:js'], () => {
     .pipe(plugins.sourcemaps.init())
     .pipe(gulp.dest(TMP_DIR))
     .pipe(plugins.achingbrain.webpackSourcemaps({
+      devtool: 'inline-source-map',
       resolve: {
         modules: [
-          path.join(USER_DIR, 'js'),
+          'js',
           'node_modules'
+        ]
+      },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: [{
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env'],
+                plugins: [
+                  '@babel/plugin-transform-runtime',
+                  '@babel/plugin-proposal-object-rest-spread',
+                  '@babel/plugin-proposal-async-generator-functions'
+                ]
+              }
+            }]
+          },
+          {
+            test: /\.styl$/,
+            exclude: /(node_modules|bower_components)/,
+            use: [
+              {
+                loader: 'style-loader'
+              },
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true
+                }
+              },
+              {
+                loader: 'stylus-loader'
+              }
+            ]
+          }
         ]
       }
     }))
-    .pipe(plugins.babel({
-      presets: ['env']
-    }))
-    .pipe(plugins.uglify())
-    .pipe(plugins.sourcemaps.write())
+    // .pipe(plugins.uglify())
+    // .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest(path.join(DIST_DIR, 'js')))
     .pipe(plugins.connect.reload())
 })
