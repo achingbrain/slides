@@ -33,7 +33,13 @@ try {
 var deck = bespoke.from('article', plugins)
 
 try {
-  require('deck')(deck)
+  let d = require('deck')
+
+  if (d && typeof d.default === 'function') {
+    d = d.default
+  }
+
+  d(deck)
 } catch (error) {
 
 }

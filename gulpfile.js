@@ -49,6 +49,7 @@ gulp.task('js', ['clean:js'], () => {
                 presets: ['@babel/preset-env'],
                 plugins: [
                   '@babel/plugin-transform-runtime',
+                  '@babel/plugin-transform-regenerator',
                   '@babel/plugin-proposal-object-rest-spread',
                   '@babel/plugin-proposal-async-generator-functions'
                 ]
@@ -76,22 +77,21 @@ gulp.task('js', ['clean:js'], () => {
         ]
       }
     }))
-    // .pipe(plugins.uglify())
-    // .pipe(plugins.sourcemaps.write())
+    .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest(path.join(DIST_DIR, 'js')))
     .pipe(plugins.connect.reload())
 })
 
 gulp.task('html', ['clean:html', 'html:template'], () => {
-  return gulp.src(path.join(TMP_DIR, 'template.jade'))
-    .pipe(plugins.jade({ pretty: true }))
+  return gulp.src(path.join(TMP_DIR, 'template.pug'))
+    .pipe(plugins.pug({ pretty: true }))
     .pipe(plugins.rename('index.html'))
     .pipe(gulp.dest(DIST_DIR))
     .pipe(plugins.connect.reload())
 })
 
 gulp.task('html:template', () => {
-  return gulp.src(path.join(SRC_DIR, 'template.jade'))
+  return gulp.src(path.join(SRC_DIR, 'template.pug'))
     .pipe(plugins.template({
       author: SLIDES_AUTHOR,
       description: SLIDES_DESCRIPTION,
